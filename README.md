@@ -6,3 +6,4 @@ things to add:
 - installing psutil
 - json output
 - building it into a package
+- add css for the html page
