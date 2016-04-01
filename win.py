@@ -3,18 +3,20 @@ import platform
 import getpass
 from os import popen
 import socket
+import sys
 
+startTime = t.time()
 LOG = []
 COMMANDS = {
 
     'system': platform.system, 
     'processor': platform.processor, 
     'machine': platform.machine, 
-    'release': platform.release, 
-    'version': platform.version, 
+    'platform-release': platform.release, 
+    'platform-version': platform.version, 
 	'username': getpass.getuser, 
 	'wmic:cpu': 'wmic cpu get name',
-	'wmic:serial number': "wmic bios get serialnumber", 
+	'wmic:serial-number': "wmic bios get serialnumber", 
 	'ipv6': socket.has_ipv6, 
     'ipv4': socket.gethostbyname(socket.gethostname()), 
     'hostname': socket.gethostname
@@ -41,9 +43,13 @@ def excute(command, command_name):
 		write_to_log({command_name : local_query})
 
 
-def run_commands():
-	for command in COMMANDS.keys():
-		excute(COMMANDS[command], command)
+def run_commands(commands_to_run="all"):
+	if commands_to_run ==  "all":
+		for command in COMMANDS.keys():
+			excute(COMMANDS[command], command)
+	else:
+		for command in commands_to_run.split("~"):
+			excute(COMMANDS[command], command)
 
 
 def write_to_log(info):
@@ -57,7 +63,7 @@ def write_html(log):
 	<head>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="./main.css" />
-		<title>Log for{0}</title>
+		<title>Log for {0}</title>
 	</head>
 	<body>
 	<div class="jumbotron">
@@ -77,12 +83,20 @@ def write_html(log):
 	</div>
 	</body>
 	</html>
-	'''
+	<!-- Generated in around {0} seconds -->
+	'''.format(t.time() - startTime)
 	f = open('info.html', 'wb')
 	f.write(base_html + end_html)
 	f.close()
 
+def check_arguments():
+	if len(sys.argv) <= 1:
+		run_commands()
+	else:
+		run_commands(sys.argv[1])
 
 if __name__ == '__main__':
-	run_commands()
+	check_arguments()
+	# run_commands()
 	write_html(LOG)
+
