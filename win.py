@@ -4,6 +4,7 @@ import getpass
 from os import popen
 import socket
 import sys
+import uuid
 
 startTime = t.time()
 LOG = []
@@ -19,7 +20,8 @@ COMMANDS = {
 	'wmic:serial-number': "wmic bios get serialnumber", 
 	'ipv6': socket.has_ipv6, 
     'ipv4': socket.gethostbyname(socket.gethostname()), 
-    'hostname': socket.gethostname
+    'hostname': socket.gethostname,
+	'mac': uuid.getnode
 
 }
 
