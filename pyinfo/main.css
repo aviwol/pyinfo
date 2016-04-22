@@ -1,0 +1,19 @@
+html{
+	background-color: #eee; 
+}
+
+.greenfy{
+	color: green;
+}
+
+.purplfy{
+	color: purple;
+}
+
+h2{
+    padding-left: 15px !important;
+}
+
+.jumbotron{
+    padding: 15px;
+}
