@@ -33,7 +33,7 @@ By default the script will act to your input as a function and try excuting it. 
 	```'wmic:cpu'``` - Returns CPU type <br>
 	```'wmic:serial-number'``` - Returns computer S/N (Notice that if your computer is home built there will not be a S/N) <br>
 	```'alone:Has-ipv6'``` - Checks if ipv6 is supported, returns "True"/"False" <br>
-  ```'alone:ipv4'``` - Gets ipv4 of teh computer <br>
+  ```'alone:ipv4'``` - Gets ipv4 of the computer <br>
   ```'hostname'``` - Returns the hostname <br>
 	```'alone:mac-address'``` - Returns the computers mac address <br>
 
