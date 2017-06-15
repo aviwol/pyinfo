@@ -5,7 +5,7 @@ from os import popen
 import socket
 import sys
 import uuid
-import res
+import re
 
 startTime = t.time()
 LOG = []
